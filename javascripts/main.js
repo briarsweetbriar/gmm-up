@@ -1,5 +1,7 @@
 function initialize() {
 
+  var destructableStuff = []
+
   $("input:checkbox").each(function( index ) {
     this.checked = false;
   });
@@ -21,7 +23,7 @@ function initialize() {
         $.each( data, function( shape, shapeHash ) {
           if (shape == "polygon") {
             $.each( shapeHash, function( type, typeHash ){
-              window[type] = []
+              destructableStuff[type] = []
               $.each( typeHash["paths"], function( index, coordArray){
                 var coords = []
                 $.each( coordArray, function( index, coordSets){
@@ -42,7 +44,7 @@ function initialize() {
                   paths: coords
                 });
                 polygon.setMap(map);
-                window[type].push(polygon);
+                destructableStuff[type].push(polygon);
               });
             });
           }
@@ -50,7 +52,7 @@ function initialize() {
       });
     }
     else{
-      $.each( window[type], function(index, shape){
+      $.each( destructableStuff[type], function(index, shape){
         shape.setMap(null);
       })
     }
