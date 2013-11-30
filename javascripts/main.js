@@ -1,6 +1,6 @@
 function initialize() {
 
-  var destructableStuff = []
+  var destructableStuff = {}
 
   $("input:checkbox").each(function( index ) {
     this.checked = false;
