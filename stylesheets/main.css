@@ -1,0 +1,13 @@
+.map-interface{
+  position: fixed;
+  top: 28px;
+  right: 28px;
+  z-index: 500;
+  background: #fff;
+  padding: 14px;
+}
+
+.map-canvas{
+  width: 100%;
+  height: 100%;
+}
