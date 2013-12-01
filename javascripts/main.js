@@ -65,9 +65,9 @@ function initialize() {
         <input type='checkbox' id='"+type+"' class='map-option'>"+type+"\
       </li>");
     });
-  });
 
-  $( ".map-option" ).click(function() {
-    handleOptionToggle( $(this).attr('id') )
+    $( ".map-option" ).click(function() {
+      handleOptionToggle( $(this).attr('id') )
+    });
   });
 }
