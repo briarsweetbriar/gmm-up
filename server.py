@@ -1,6 +1,5 @@
 
-from flask import Flask, jsonify,send_from_directory
-import json
+from flask import Flask, jsonify,send_from_directory,request
 import zoning
 
 app = Flask(__name__,static_folder='static')
@@ -39,10 +38,14 @@ def hello():
     with open('index.html','rb') as f:
         return f.read()
 
-@app.route("/data/")
+@app.route("/data/",methods=['GET', 'POST'])
 def give_data():
-
-    return jsonify(zoning.zone_me())
+    try:
+	qtype = request.args['type']
+    except KeyError:
+	return None
+    else:
+	return jsonify(zoning.zone_me(qtype))
 
 @app.route('/javascripts/<path:filename>')
 def send_js(filename):

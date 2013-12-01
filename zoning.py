@@ -35,9 +35,24 @@ def condense_dict(dictionary,explode_param = '-'):
     return retdict
 
 
-def zone_me():
+def zone_me(qtype):
+    '''Takes qtype = name of zone to return, ie "GO"
+    returns a dictionary like:
+    {'polygon':
+      {zoneType:
+        {'strokeColor':'#262626',
+         'fillColor':'#A6CEE3',
+         'fillOpacity':0.5,
+         'paths':
+           [ [ [p1,p2,p3],], [poly2,holeinpoly2], ]
+         }
+       }
+     }
+    '''
 
-    '''#get all the zones that are derivatives of these basic types
+
+    '''
+    #get all the zones that are derivatives of these basic types
     base_types = ['GO', 'LR', 'GR', 'CBD', 'DMU', 'CS', 'CS', 'CH']
     #base_types = ['GO']
     all_types = zoningrecords.record_field_possibilities(field=zoning_field)
@@ -48,7 +63,7 @@ def zone_me():
             #print key, value
             valid_types.append(key)
     '''
-    valid_types = ['GO']
+    valid_types = [qtype]
     zonedict = zoningrecords.records_of_type(zoning_field,valid_types)
 
     ## Make things pretty with colors
@@ -62,7 +77,7 @@ def zone_me():
 
     json_hash = {'polygon':{}}
     for zone,condensed_data in zonedict.items():
-      zone='L57'
+      #zone='L57'
       #I know there's only polygons, so no need to use a more robust method
       json_hash['polygon'][zone]={}
       cntr = 0
