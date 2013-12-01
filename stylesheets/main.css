@@ -23,9 +23,9 @@ body{
   list-style-type: none;
   padding: 0;
   margin: 0;
-  column-width: 75px;
-  -moz-column-width: 75px;
-  -webkit-column-width: 75px;
+  width: 80px;
+  height: 400px;
+  overflow: auto;
 }
 
 .color-box{
