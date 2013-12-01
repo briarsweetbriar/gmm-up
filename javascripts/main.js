@@ -62,12 +62,12 @@ function initialize() {
     $.each(data, function(type, color){
       $("#map_interface_options").append("<li>\
         <span class='color-box' style='background: "+color+";'></span>\
-        <input type='checkbox' id='"+type+"' class='map-option'>"+type+"\
+        <input type='checkbox' data-type='"+type+"' class='map-option'>"+type+"\
       </li>");
     });
 
     $( ".map-option" ).click(function() {
-      handleOptionToggle( $(this).attr('id') )
+      handleOptionToggle( $(this).data('type') )
     });
   });
 }
