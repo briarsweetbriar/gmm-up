@@ -61,8 +61,8 @@ function initialize() {
   $.getJSON( "http://192.168.0.13:5000/options", function( data ) {
     $.each(data, function(type, color){
       $("#map_interface_options").append("<li>\
-        <input type='checkbox' id='"+type+"' class='map-options'>"+type+"\
         <span class='color-box' style='background: "+color+";'></span>\
+        <input type='checkbox' id='"+type+"' class='map-option'>"+type+"\
       </li>");
     });
   });

@@ -9,7 +9,7 @@ body{
   right: 7px;
   z-index: 500;
   background: #fff;
-  padding: 14px;
+  padding: 11px;
   box-shadow: 0 0 2px 1px #ccc;
 }
 
@@ -24,8 +24,14 @@ body{
   margin: 0;
 }
 
+.map-option{
+  height: 10px;
+  width: 10px;
+}
+
 .color-box{
-  height: 18px;
-  width: 18px;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
   border: thin solid #000;
 }
