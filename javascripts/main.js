@@ -16,7 +16,7 @@ function initialize() {
   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
   function handleOptionToggle(type){
-    if($("#"+type).is(':checked')){
+    if($("input[data-type='" + type +"']").is(':checked')){
 
       $.getJSON( "http://192.168.0.13:5000/data/?&type=" + type, function( data ) {
 
@@ -62,12 +62,12 @@ function initialize() {
     $.each(data, function(type, color){
       $("#map_interface_options").append("<li>\
         <span class='color-box' style='background: "+color+";'></span>\
-        <input type='checkbox' data-typer='"+type+"' class='map-option'>"+type+"\
+        <input type='checkbox' data-type='"+type+"' class='map-option'>"+type+"\
       </li>");
     });
 
     $( ".map-option" ).click(function() {
-      handleOptionToggle( $(this).data('typer') )
+      handleOptionToggle( $(this).data('type') )
     });
   });
 }
