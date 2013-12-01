@@ -64,8 +64,8 @@ function initialize() {
         <input type='checkbox' id='"+type+"' class='map-options'>"+type+"\
         <span class='color-box' style='background: "+color+";'></span>\
       </li>");
-    })
-  }
+    });
+  });
 
   $( ".map-option" ).click(function() {
     handleOptionToggle( $(this).attr('id') )
