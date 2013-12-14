@@ -1,5 +1,6 @@
 function initialize() {
 
+  var IP_addy =  'http://192.168.1.154:5000'
   var destructableStuff = {}
 
   $("input:checkbox").each(function( index ) {
@@ -18,7 +19,8 @@ function initialize() {
   function handleOptionToggle(type){
     if($("input[data-type='" + type +"']").is(':checked')){
 
-      $.getJSON( "http://192.168.0.13:5000/data/?&type=" + type, function( data ) {
+      
+      $.getJSON( IP_addy+"/data/?&type=" + type, function( data ) {
 
         $.each( data, function( shape, shapeHash ) {
           if (shape == "polygon") {
@@ -58,7 +60,7 @@ function initialize() {
     }
   }
 
-  $.getJSON( "http://192.168.0.13:5000/options", function( data ) {
+  $.getJSON( IP_addy+"/options/", function( data ) {
     $.each(data, function(type, color){
       $("#map_interface_options").append("<li>\
         <span class='color-box' style='background: "+color+";'></span>\
