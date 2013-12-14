@@ -72,6 +72,8 @@ function initialize() {
         $( ".map-option-"+app ).click(function() {
           handleOptionToggle( $(this).data('type'), app )
         });
+
+        destructableStuff.push(app)
       });
     }
     else{
