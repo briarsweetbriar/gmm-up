@@ -61,7 +61,7 @@ function initialize() {
   function handleAppToggle(type){
     if($("input[data-type='" + type +"']").is(':checked')){
 
-      $.getJSON( "app/?&type=" + type, function( data ) {
+      $.getJSON( "app/?&app=" + type, function( data ) {
         $.each(data, function(type, color){
           $("#"+type+"_app_list").append("<li>\
             <span class='color-box' style='background: "+color+";'></span>\
