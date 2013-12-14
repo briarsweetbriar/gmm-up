@@ -18,7 +18,7 @@ function initialize() {
   function handleOptionToggle(type){
     if($("input[data-type='" + type +"']").is(':checked')){
 
-      $.getJSON( "http://192.168.0.13:5000/data/?&type=" + type, function( data ) {
+      $.getJSON( "data/?&type=" + type, function( data ) {
 
         $.each( data, function( shape, shapeHash ) {
           if (shape == "polygon") {
