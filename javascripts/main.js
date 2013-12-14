@@ -86,8 +86,8 @@ function initialize() {
   $.getJSON("apps/", function( data ) {
     $.each(data.apps, function(index, type){
       $("#map_interface_apps").append("<li>\
-        <input type='checkbox' data-type='"+type+"' class='map-option'>"+type+"\
-        <ul id='"+type+"_app_list' class='app-option options'></ul>\
+        <input type='checkbox' data-type='"+type+"' class='app-option'>"+type+"\
+        <ul id='"+type+"_app_list' class='options'></ul>\
       </li>");
     });
 
