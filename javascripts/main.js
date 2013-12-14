@@ -58,25 +58,25 @@ function initialize() {
     }
   }
 
-  function handleAppToggle(type){
-    if($("input[data-type='" + type +"']").is(':checked')){
+  function handleAppToggle(app){
+    if($("input[data-type='" + app +"']").is(':checked')){
 
-      $.getJSON( "app/?&app=" + type, function( data ) {
+      $.getJSON( "app/?&app=" + app, function( data ) {
         $.each(data, function(type, color){
-          $("#"+type+"_app_list").append("<li>\
+          $("#"+app+"_app_list").append("<li>\
             <span class='color-box' style='background: "+color+";'></span>\
             <input type='checkbox' data-type='"+type+"' class='map-option-"+type+"'>"+type+"\
           </li>");
         });
 
-        $( ".map-option-"+type ).click(function() {
-          handleOptionToggle( $(this).data('type'), type )
+        $( ".map-option-"+app ).click(function() {
+          handleOptionToggle( $(this).data('type'), app )
         });
       });
     }
     else{
-      $.each( destructableStuff[type], function(index, option){
-        $.each( destructableStuff[type][option], function(index, shape){
+      $.each( destructableStuff[app], function(index, option){
+        $.each( destructableStuff[app][option], function(index, shape){
           shape.setMap(null);
         })
       })
