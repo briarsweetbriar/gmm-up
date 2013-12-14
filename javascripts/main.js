@@ -83,24 +83,11 @@ function initialize() {
     }
   }
 
-  $.getJSON("options/", function( data ) {
-    $.each(data, function(type, color){
-      $("#map_interface_options").append("<li>\
-        <span class='color-box' style='background: "+color+";'></span>\
-        <input type='checkbox' data-type='"+type+"' class='map-option'>"+type+"\
-      </li>");
-    });
-
-    $( ".map-option" ).click(function() {
-      handleOptionToggle( $(this).data('type') )
-    });
-  });
-
   $.getJSON("apps/", function( data ) {
     $.each(data, function(type, color){
       $("#map_interface_apps").append("<li>\
         <input type='checkbox' data-type='"+type+"' class='map-option'>"+type+"\
-        <ul id='"+type+"_app_list' class='app-option'></ul>\
+        <ul id='"+type+"_app_list' class='app-option options'></ul>\
       </li>");
     });
 
