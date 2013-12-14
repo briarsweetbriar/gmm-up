@@ -73,7 +73,7 @@ function initialize() {
           handleOptionToggle( $(this).data('type'), app )
         });
 
-        destructableStuff.push(app)
+        destructableStuff[app] = {}
       });
     }
     else{
