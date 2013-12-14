@@ -15,10 +15,10 @@ function initialize() {
 
   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-  function handleOptionToggle(type){
+  function handleOptionToggle(type, app){
     if($("input[data-type='" + type +"']").is(':checked')){
 
-      $.getJSON( "data/?&type=" + type, function( data ) {
+      $.getJSON( "data/?&type=" + type + "&app=" + app, function( data ) {
 
         $.each( data, function( shape, shapeHash ) {
           if (shape == "polygon") {
@@ -44,7 +44,7 @@ function initialize() {
                   paths: coords
                 });
                 polygon.setMap(map);
-                destructableStuff[type].push(polygon);
+                destructableStuff[app][type].push(polygon);
               });
             });
           }
@@ -52,8 +52,33 @@ function initialize() {
       });
     }
     else{
-      $.each( destructableStuff[type], function(index, shape){
+      $.each( destructableStuff[app][type], function(index, shape){
         shape.setMap(null);
+      })
+    }
+  }
+
+  function handleAppToggle(type){
+    if($("input[data-type='" + type +"']").is(':checked')){
+
+      $.getJSON( "app/?&type=" + type, function( data ) {
+        $.each(data, function(type, color){
+          $("#"+type+"_app_list").append("<li>\
+            <span class='color-box' style='background: "+color+";'></span>\
+            <input type='checkbox' data-type='"+type+"' class='map-option-"+type+"'>"+type+"\
+          </li>");
+        });
+
+        $( ".map-option-"+type ).click(function() {
+          handleOptionToggle( $(this).data('type'), type )
+        });
+      });
+    }
+    else{
+      $.each( destructableStuff[type], function(index, option){
+        $.each( destructableStuff[type][option], function(index, shape){
+          shape.setMap(null);
+        })
       })
     }
   }
@@ -68,6 +93,19 @@ function initialize() {
 
     $( ".map-option" ).click(function() {
       handleOptionToggle( $(this).data('type') )
+    });
+  });
+
+  $.getJSON("apps/", function( data ) {
+    $.each(data, function(type, color){
+      $("#map_interface_apps").append("<li>\
+        <input type='checkbox' data-type='"+type+"' class='map-option'>"+type+"\
+        <ul id='"+type+"_app_list' class='app-option'></ul>\
+      </li>");
+    });
+
+    $( ".app-option" ).click(function() {
+      handleAppToggle( $(this).data('type') )
     });
   });
 }
