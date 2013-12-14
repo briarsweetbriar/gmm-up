@@ -138,7 +138,7 @@ def data(query):
     #TODO: Make json_hash['poygon']=list() to keep ordering, duh
     json_hash = {'polygon':dict()}
     old = []
-    print "legend: {}".format(legend[i])
+    #print "legend: {}".format(legend[i])
     working_dict = {'strokeColor':almostblack,
 	    'fillColor':hexcolors[i],
 	    'fillOpacity':0.4,
