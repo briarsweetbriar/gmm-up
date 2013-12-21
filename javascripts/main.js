@@ -23,7 +23,6 @@ function initialize() {
         $.each( data, function( shape, shapeHash ) {
           if (shape == "polygon") {
             $.each( shapeHash, function( type, typeHash ){
-              destructableStuff[type] = []
               $.each( typeHash["paths"], function( index, coordArray){
                 var coords = []
                 $.each( coordArray, function( index, coordSets){
@@ -48,7 +47,7 @@ function initialize() {
                   destructableStuff[app] = {}
                 }
                 if (!(type in destructableStuff[app])){
-                  destructableStuff[app][type] = {}
+                  destructableStuff[app][type] = []
                 }
                 destructableStuff[app][type].push(polygon);
               });
