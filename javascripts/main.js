@@ -44,6 +44,12 @@ function initialize() {
                   paths: coords
                 });
                 polygon.setMap(map);
+                if (!(app in destructableStuff)){
+                  destructableStuff[app] = {}
+                }
+                if (!(type in destructableStuff[app])){
+                  destructableStuff[app][type] = {}
+                }
                 destructableStuff[app][type].push(polygon);
               });
             });
