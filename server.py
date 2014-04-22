@@ -1,14 +1,30 @@
+#!/usr/bin/python
+'''
+A Server to respond to ajax requests from the gmm-up javascript front end.
+
+'''
+
 
 from flask import Flask, jsonify,send_from_directory,request
 
-example = 1
-if example == 0:
-  import zoning as myapp
-else:
-  import WhereWeMeet as myapp
+import zoning
+import WhereWeMeet
 
+#Set up flask server
 app = Flask(__name__,static_folder='static')
 
+#name the apps this server can provide
+apps = ["zoning","travel-time"]
+myapp = None  #Initial app loaded.  None right now
+
+def get_app(appstring):
+    '''Set which app is going to be responding to requests'''
+    if appstring == 'zoning':
+	return zoning
+    elif appstring == 'travel-time':
+	return WhereWeMeet
+
+#an example json response, incase you care to see.
 json_response = {
   'polygon':
     {'L57':
@@ -36,27 +52,37 @@ json_response = {
      }
  }
 
-j_r = {'booger':'123'}
-
 @app.route("/")
 def hello():
     with open('index.html','rb') as f:
         return f.read()
 
+@app.route("/apps/")
+def give_apps():
+    '''Just return the list of apps that are available'''		
+    return jsonify({'apps':apps})
+
 @app.route("/data/",methods=['GET', 'POST'])
 def give_data():
     try:
 	qtype = request.args['type']
+	appstring = request.args['app']
     except KeyError:
 	return None
     else:
+	myapp = get_app(appstring)
 	return jsonify(myapp.data(qtype))
 
-@app.route("/options/",methods=['GET','POST'])
+@app.route("/app/",methods=['GET','POST'])
 def give_options():
-     return jsonify(myapp.options())
-'''    return jsonify({'This':'#453627'})
-'''
+    try:
+	appstring = request.args['app']
+    except KeyError:
+	return None
+    else:
+	myapp = get_app(appstring)
+        return jsonify(myapp.options())
+
 @app.route('/javascripts/<path:filename>')
 def send_js(filename):
      with open('./javascripts/%s'%filename,'rb') as f:
